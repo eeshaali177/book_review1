@@ -1,9 +1,15 @@
 class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /books or /books.json
   def index
-    @books = Book.current_user
+    if params[:category].blank?
+    @books = Book.all.order("created_at DESC")
+    else
+      @category_id= Category.find_by(name: params[:category]).id
+      @books= Book.where(:category_id => @category_id).order("created_at DESC")
+    end
   end
 
   # GET /books/1 or /books/1.json
@@ -13,7 +19,7 @@ class BooksController < ApplicationController
   # GET /books/new
   def new
     @book = current_user.books.build
-    @categories = Category.all.map{|c| [c.name, c.id]}
+    @categories = Category.all.map {|c| [c.name, c.id]}
   end
 
   # GET /books/1/edit
