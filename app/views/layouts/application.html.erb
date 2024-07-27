@@ -24,7 +24,9 @@
               <a href="#" class="nav-link dropdown-toggle" id="categoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
               <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
                 <% Category.all.each do |category| %>
+                  <li class=" <%= 'active' if params[:category] == category.name%>">
                   <li><%= link_to category.name, books_path(category: category.name), class: "dropdown-item" %></li>
+                  </li>
                 <% end %>
               </ul>
             </li>

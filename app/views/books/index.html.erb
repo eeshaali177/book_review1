@@ -3,6 +3,10 @@
 <h1>Books</h1>
 
 <div id="books">
+<h2 class= "current-category"><%= params[:category]%></h2>
+<% if @books.count == 0%>
+<h5> there are no books in this category</h5>
+<% else%>
   <% @books.each do |book| %>
     <p>
       <%= book.title %>
@@ -10,6 +14,7 @@
     <p>
       <%= link_to "Show this book", book %>
     </p>
+  <% end %>
   <% end %>
 </div>
 
