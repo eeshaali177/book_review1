@@ -9,6 +9,7 @@
   <%= link_to "Back to books", books_path %>
 
   <%= button_to "Destroy this book", @book, method: :delete %>
+    <%= image_tag (@book.image, class: "image") %>
   <% end %>
   <% end %>
 </div>
